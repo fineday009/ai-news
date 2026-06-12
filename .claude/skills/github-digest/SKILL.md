@@ -49,13 +49,14 @@ python3 "<本 skill 目录>/scripts/fetch_repos.py" <daily|weekly|monthly|yearly
 
 格式：
 
-报告为**中英双语**：每段先中文、后英文。项目原始描述是英文的，英文部分保留原文（可微调）；原始描述是中文的，翻译成英文。点评（为什么值得关注）中英文内容对应。
+报告为**中英双语**：每段先中文、后英文。项目原始描述是英文的，英文部分保留原文（可微调）；原始描述是中文的，翻译成英文。点评（为什么值得关注）中英文内容对应。注意：中英文之间必须隔一个空行（blockquote 里用单独一行 `>`），否则 GitHub 渲染时两种语言会挤在同一行。
 
 ```markdown
 # GitHub 每日精选 · YYYY-MM-DD
 # GitHub Daily Digest · YYYY-MM-DD
 
 > 一句话概括今日趋势（如：本地 Agent 工具持续爆发，xx 领域出现黑马）
+>
 > One-line English summary of today's trend.
 
 ## 1. owner/repo
@@ -63,9 +64,11 @@ python3 "<本 skill 目录>/scripts/fetch_repos.py" <daily|weekly|monthly|yearly
 ⭐ 33.6k（今日 +2,430）· Swift · [链接](https://github.com/owner/repo)
 
 **是什么**：一句话中文简介。
+
 **What it is**: Original English description (or English translation if the source is Chinese).
 
 **为什么值得关注**：2–3 句，讲清它解决的问题、差异化、适合谁用。
+
 **Why it matters**: English version of the same commentary.
 
 ---
