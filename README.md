@@ -22,3 +22,11 @@ GitHub's most valuable open-source projects (AI-focused but not AI-only), biling
 `.claude/skills/github-digest/` — 抓取 GitHub Trending + Search API 候选（约 50 个），按"AI 优先、实质优先、看动量和新意"的标准精选。
 
 手动使用：在 Claude Code 中运行 `/github-digest`（可加 `weekly` / `monthly` / `yearly` / `all`）。
+
+日报额外包含「🎙️ Builders 动态」一节：AI builders 的推文观点、播客要点与博客精选。
+
+## 鸣谢 · Credits
+
+「Builders 动态」的内容数据（builders 推文 / 播客转录 / 博客 feed）与策展规则来自开源项目 **[follow-builders](https://github.com/zarazhangrui/follow-builders)**（作者 [@zarazhangrui](https://github.com/zarazhangrui)，MIT License）——本仓库直接消费其公开中央 feed，源列表由原作者持续维护更新。
+
+The "What Builders Are Saying" section consumes the public central feed of **[follow-builders](https://github.com/zarazhangrui/follow-builders)** by [@zarazhangrui](https://github.com/zarazhangrui) (MIT License). The curated source list is maintained upstream by the original author.

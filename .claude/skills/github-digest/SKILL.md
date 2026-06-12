@@ -36,7 +36,30 @@ python3 "<本 skill 目录>/scripts/fetch_repos.py" <daily|weekly|monthly|yearly
 
 候选信息不足以判断时（描述为空或含糊），用 WebFetch 抓该仓库主页补充了解，最多查 3–5 个，不要逐一全查。
 
-### 5. 生成报告
+### 5. Builders 动态（仅 daily）
+
+日报在 10 个项目之后追加一节「🎙️ Builders 动态 / What Builders Are Saying」。内容与 remix 规则均来自 [follow-builders](https://github.com/zarazhangrui/follow-builders)（作者 zarazhangrui，MIT 协议）的公共 feed，无需 API key：
+
+```bash
+BASE=https://raw.githubusercontent.com/zarazhangrui/follow-builders/main
+curl -s $BASE/feed-x.json          # builders 推文
+curl -s $BASE/feed-podcasts.json   # 播客（含全文 transcript）
+curl -s $BASE/feed-blogs.json      # 博客
+curl -s $BASE/prompts/digest-intro.md $BASE/prompts/summarize-tweets.md $BASE/prompts/summarize-podcast.md   # 官方 remix prompts
+```
+
+remix 时优先遵循上面拉到的官方 prompts（整体框架、推文/播客的总结口吻）；与本 skill 冲突的地方（双语格式、放进 Markdown 报告而非聊天投递）以本 skill 为准。
+
+- **推文**（feed-x.json）：从 builders 近期推文中挑 5–8 条最有信息量的观点/发布，每条 1–2 句概括；身份用 `bio` 字段推断（没有就只写名字），**每条必须附原推 url**
+- **播客**（feed-podcasts.json）：至多 1 期，含全文 transcript；如有则总结 3–5 个要点，附节目 url（用 JSON 里的 name/title/url，不要从 transcript 里猜）
+- **博客**（feed-blogs.json）：挑 1–3 篇值得读的，一句话点评 + url
+- 铁律：只用 feed 里的内容，**绝不编造**；没有 url 的内容不写；feed 拉取失败或为空则整节省略，不要报错
+- 注意 feed-podcasts.json 可能很大（含 transcript），建议先用 python3/jq 提取字段再读
+- 同样中英双语、中英之间隔空行；周/月/年榜不含此节
+- **出处声明（必须）**：本节末尾固定加一行：
+  `> 本节内容与策展规则来自开源项目 [follow-builders](https://github.com/zarazhangrui/follow-builders)（作者 [@zarazhangrui](https://github.com/zarazhangrui)，MIT License）。Content and curation rules from the open-source project follow-builders by @zarazhangrui (MIT License).`
+
+### 6. 生成报告
 
 按周期写入对应文件（目录不存在则创建）：
 
@@ -75,10 +98,13 @@ daily 每天产生新文件；weekly/monthly/yearly 是**当期快照**——同
 
 ---
 （共 10 个，按价值排序）
+
+## 🎙️ Builders 动态 / What Builders Are Saying
+（仅日报；内容与规则见第 5 节：推文精选 → 播客要点 → 博客推荐，每条附 url）
 ```
 
 其他周期标题改为"每周/每月/年度精选"，star 增量标注"本周/本月"；yearly 没有增量数据，标注总 star 数和创建时间即可。
 
-### 6. 汇报
+### 7. 汇报
 
 最后在对话中给用户一份精简版（每个项目一行：名字 + 一句话 + star 增量），并附报告文件路径。
