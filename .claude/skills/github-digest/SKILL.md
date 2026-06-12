@@ -11,7 +11,7 @@ description: 抓取并精选每日/每周/每月/每年 GitHub 最有价值的�
 
 ### 1. 确定周期
 
-参数含 `weekly`（周）→ weekly，`monthly`（月）→ monthly，`yearly`（年）→ yearly，否则 daily。
+参数含 `weekly`（周）→ weekly，`monthly`（月）→ monthly，`yearly`（年）→ yearly，`all`（全部）→ 依次生成四个周期各一份报告，否则 daily。
 
 ### 2. 抓取候选数据
 
@@ -46,6 +46,8 @@ python3 "<本 skill 目录>/scripts/fetch_repos.py" <daily|weekly|monthly|yearly
 | weekly | `reports/weekly/YYYY-Www.md` | `date +%G-W%V` |
 | monthly | `reports/monthly/YYYY-MM.md` | `date +%Y-%m` |
 | yearly | `reports/yearly/YYYY.md` | `date +%Y` |
+
+daily 每天产生新文件；weekly/monthly/yearly 是**当期快照**——同一周期内重复运行时用最新数据整体覆盖刷新该文件。
 
 格式：
 
